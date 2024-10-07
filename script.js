@@ -107,4 +107,25 @@ document.addEventListener('DOMContentLoaded', () => {
             appendDecimal();
         }
     });
+    document.addEventListener('keydown', handleKeyboardInput);
 });
+
+function handleKeyboardInput(e) {
+    if (e.key >= '0' && e.key <= '9') {
+        appendNumber(e.key);
+    } else if (e.key === '.') {
+        appendDecimal();
+    } else if (e.key === '+' || e.key === '-' || e.key === '*' || e.key === '/') {
+        const operatorMap = {
+            '+': 'add',
+            '-': 'substract',
+            '*': 'multiply',
+            '/': 'divide',
+        };
+        setOperation(operatorMap[e.key]);
+    } else if (e.key === 'Enter' || e.key === '=') {
+        compute();
+    } else if (e.key === 'Escape') {
+        clear();
+    }
+}
